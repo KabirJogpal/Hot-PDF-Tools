@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Tools - Free Online PDF Editor, Merger & Compressor</title>
+  <meta name="description"
+    content="Transform PDFs instantly with our free online tools. Merge, compress, and convert PDFs securely with no installation. Fast, reliable, and user-friendly PDF solution.">
+  <meta name="google" content="notranslate">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="PDF Tools">
+  <meta name="apple-mobile-web-app-title" content="PDF Tools">
+  <link rel="icon" type="image/png" href="generated-icon.png">
+  <meta name="keywords"
+    content="pdf editor online, free pdf tools, pdf merger online, pdf compressor, pdf converter, image to pdf converter, combine pdf files, pdf editor free">
+  <meta property="og:title" content="PDF Tools - Free Online PDF Editor & File Converter">
+  <meta property="og:description"
+    content="Transform your PDFs effortlessly with our free online tools. Merge, compress, convert PDFs and images instantly.">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="PDF Tools">
+  <link rel="canonical" href="https://pdftools.repl.co/">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" as="style">
+  <link rel="preload" href="style.css" as="style">
+  <link rel="preload" href="script.js" as="script">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <meta http-equiv="Cache-Control" content="max-age=31536000">
+  <meta name="theme-color" content="#ff2d55">
+</head>
+
+<body>
+  <nav>
+    <div class="nav-brand">PDF Tools</div>
+    <div class="nav-links">
+      <button class="nav-link active" data-tab="home">Home</button>
+      <button class="nav-link" data-tab="merger">PDF Merger</button>
+      <button class="nav-link" data-tab="imgToPdf">Image to PDF</button>
+      <button class="nav-link" data-tab="compressor">PDF Compressor</button>
+    </div>
+  </nav>
+
+  <div id="home" class="tab-content active">
+    <div class="hero-subtitle"></div>
+  </div>
+
+  <div id="merger" class="tab-content">
+    <div class="container">
+      <h2>PDF Merger</h2>
+      <div class="file-drop-zone" id="pdfDropZone">Drop PDF files here or click to select</div>
+      <input type="file" id="pdfInput" multiple accept=".pdf" style="display: none;">
+      <div class="progress-bar">
+        <div class="progress-bar-fill"></div>
+      </div>
+      <button class="action-btn" id="mergeBtn">
+        <span>Merge PDFs</span>
+        <div class="loading-spinner"></div>
+      </button>
+    </div>
+  </div>
+
+  <div id="imgToPdf" class="tab-content">
+    <div class="container">
+      <h2>Image to PDF</h2>
+      <input type="file" id="imageInput" accept=".jpg,.jpeg,.png" multiple>
+      <button class="action-btn" id="convertToPdfBtn">Convert to PDF</button>
+    </div>
+  </div>
+
+  <div id="compressor" class="tab-content">
+    <div class="container">
+      <h2>PDF Compressor</h2>
+      <input type="file" id="pdfCompressInput" accept=".pdf">
+      <select id="compressionLevel">
+        <option value="low">Low Compression</option>
+        <option value="medium">Medium Compression</option>
+        <option value="high">High Compression</option>
+      </select>
+      <button class="action-btn" id="compressBtn">Compress PDF</button>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
