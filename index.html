@@ -22,69 +22,274 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="PDF Tools">
   <link rel="canonical" href="https://pdftools.repl.co/">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" as="style">
   <link rel="preload" href="style.css" as="style">
   <link rel="preload" href="script.js" as="script">
   <link href="style.css" rel="stylesheet" type="text/css" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
   <meta http-equiv="Cache-Control" content="max-age=31536000">
-  <meta name="theme-color" content="#ff2d55">
+  <meta name="theme-color" content="#5856d6">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-  <nav>
-    <div class="nav-brand">PDF Tools</div>
-    <div class="nav-links">
-      <button class="nav-link active" data-tab="home">Home</button>
-      <button class="nav-link" data-tab="merger">PDF Merger</button>
-      <button class="nav-link" data-tab="imgToPdf">Image to PDF</button>
-      <button class="nav-link" data-tab="compressor">PDF Compressor</button>
-    </div>
-  </nav>
-
-  <div id="home" class="tab-content active">
-    <div class="hero-subtitle"></div>
-  </div>
-
-  <div id="merger" class="tab-content">
-    <div class="container">
-      <h2>PDF Merger</h2>
-      <div class="file-drop-zone" id="pdfDropZone">Drop PDF files here or click to select</div>
-      <input type="file" id="pdfInput" multiple accept=".pdf" style="display: none;">
-      <div class="progress-bar">
-        <div class="progress-bar-fill"></div>
+  <header>
+    <nav>
+      <div class="nav-container">
+        <div class="nav-brand"><i class="fas fa-file-pdf"></i> PDF Tools</div>
+        <div class="nav-links">
+          <button class="nav-link active" data-tab="home"><i class="fas fa-home"></i> Home</button>
+          <button class="nav-link" data-tab="merger"><i class="fas fa-object-group"></i> PDF Merger</button>
+          <button class="nav-link" data-tab="imgToPdf"><i class="fas fa-image"></i> Image to PDF</button>
+          <button class="nav-link" data-tab="compressor"><i class="fas fa-compress-alt"></i> PDF Compressor</button>
+          <button class="nav-link" data-tab="pdfToImg"><i class="fas fa-file-image"></i> PDF to Images</button>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
       </div>
-      <button class="action-btn" id="mergeBtn">
-        <span>Merge PDFs</span>
-        <div class="loading-spinner"></div>
-      </button>
-    </div>
-  </div>
+    </nav>
+  </header>
 
-  <div id="imgToPdf" class="tab-content">
-    <div class="container">
-      <h2>Image to PDF</h2>
-      <input type="file" id="imageInput" accept=".jpg,.jpeg,.png" multiple>
-      <button class="action-btn" id="convertToPdfBtn">Convert to PDF</button>
+  <main>
+    <div id="home" class="tab-content active">
+      <div class="hero">
+        <h1 class="hero-title">All Your PDF Tools in One Place</h1>
+        <div class="hero-subtitle"></div>
+        <div class="features-grid">
+          <div class="feature-card" data-tab="merger">
+            <i class="fas fa-object-group"></i>
+            <h3>PDF Merger</h3>
+            <p>Combine multiple PDFs into a single document</p>
+          </div>
+          <div class="feature-card" data-tab="imgToPdf">
+            <i class="fas fa-image"></i>
+            <h3>Image to PDF</h3>
+            <p>Convert JPG and PNG images to PDF format</p>
+          </div>
+          <div class="feature-card" data-tab="compressor">
+            <i class="fas fa-compress-alt"></i>
+            <h3>PDF Compressor</h3>
+            <p>Reduce PDF file size without losing quality</p>
+          </div>
+          <div class="feature-card" data-tab="pdfToImg">
+            <i class="fas fa-file-image"></i>
+            <h3>PDF to Images</h3>
+            <p>Extract images from PDF pages</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div id="compressor" class="tab-content">
-    <div class="container">
-      <h2>PDF Compressor</h2>
-      <input type="file" id="pdfCompressInput" accept=".pdf">
-      <select id="compressionLevel">
-        <option value="low">Low Compression</option>
-        <option value="medium">Medium Compression</option>
-        <option value="high">High Compression</option>
-      </select>
-      <button class="action-btn" id="compressBtn">Compress PDF</button>
+    <div id="merger" class="tab-content">
+      <div class="container">
+        <div class="tool-header">
+          <h2><i class="fas fa-object-group"></i> PDF Merger</h2>
+          <p class="tool-description">Combine multiple PDF files into a single document in seconds</p>
+        </div>
+        <div class="file-drop-zone" id="pdfDropZone">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Drop PDF files here or click to select</p>
+          <span class="file-support">Supports multiple PDF files</span>
+        </div>
+        <input type="file" id="pdfInput" multiple accept=".pdf" style="display: none;">
+        <div class="file-list" id="pdfFileList"></div>
+        <div class="options-panel">
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="addBookmarks" checked>
+            <label for="addBookmarks">Add bookmarks for each file</label>
+          </div>
+        </div>
+        <div class="progress-container">
+          <div class="progress-status">
+            <span class="progress-percentage" id="mergeProgressText">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" id="mergeProgressBar"></div>
+          </div>
+        </div>
+        <button class="action-btn" id="mergeBtn">
+          <i class="fas fa-object-group"></i>
+          <span>Merge PDFs</span>
+          <div class="loading-spinner"></div>
+        </button>
+      </div>
+    </div>
+
+    <div id="imgToPdf" class="tab-content">
+      <div class="container">
+        <div class="tool-header">
+          <h2><i class="fas fa-image"></i> Image to PDF</h2>
+          <p class="tool-description">Convert JPG or PNG images to PDF format</p>
+        </div>
+        <div class="file-drop-zone" id="imageDropZone">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Drop image files here or click to select</p>
+          <span class="file-support">Supports JPG, JPEG, PNG</span>
+        </div>
+        <input type="file" id="imageInput" accept=".jpg,.jpeg,.png" multiple style="display: none;">
+        <div class="file-list" id="imageFileList"></div>
+        <div class="options-panel">
+          <div class="option-group">
+            <label for="pageSize">Page Size:</label>
+            <select id="pageSize">
+              <option value="a4">A4 (Default)</option>
+              <option value="letter">US Letter</option>
+              <option value="original">Original Size</option>
+            </select>
+          </div>
+          <div class="option-group">
+            <label for="pageOrientation">Orientation:</label>
+            <select id="pageOrientation">
+              <option value="auto">Auto Detect</option>
+              <option value="portrait">Portrait</option>
+              <option value="landscape">Landscape</option>
+            </select>
+          </div>
+        </div>
+        <div class="progress-container">
+          <div class="progress-status">
+            <span class="progress-percentage" id="convertProgressText">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" id="convertProgressBar"></div>
+          </div>
+        </div>
+        <button class="action-btn" id="convertToPdfBtn">
+          <i class="fas fa-file-pdf"></i>
+          <span>Convert to PDF</span>
+          <div class="loading-spinner"></div>
+        </button>
+      </div>
+    </div>
+
+    <div id="compressor" class="tab-content">
+      <div class="container">
+        <div class="tool-header">
+          <h2><i class="fas fa-compress-alt"></i> PDF Compressor</h2>
+          <p class="tool-description">Reduce the size of your PDF files</p>
+        </div>
+        <div class="file-drop-zone" id="compressDropZone">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Drop PDF file here or click to select</p>
+          <span class="file-support">Supports PDF files</span>
+        </div>
+        <input type="file" id="pdfCompressInput" accept=".pdf" style="display: none;">
+        <div class="file-list" id="compressFileList"></div>
+        <div class="options-panel">
+          <div class="option-group">
+            <label for="compressionLevel">Compression Level:</label>
+            <div class="range-slider-container">
+              <input type="range" id="compressionLevel" min="1" max="3" value="2" class="range-slider">
+              <div class="range-labels">
+                <span>Low</span>
+                <span>Medium</span>
+                <span>High</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="progress-container">
+          <div class="progress-status">
+            <span class="progress-percentage" id="compressProgressText">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" id="compressProgressBar"></div>
+          </div>
+        </div>
+        <button class="action-btn" id="compressBtn">
+          <i class="fas fa-compress-alt"></i>
+          <span>Compress PDF</span>
+          <div class="loading-spinner"></div>
+        </button>
+      </div>
+    </div>
+
+    <div id="pdfToImg" class="tab-content">
+      <div class="container">
+        <div class="tool-header">
+          <h2><i class="fas fa-file-image"></i> PDF to Images</h2>
+          <p class="tool-description">Extract pages from a PDF as image files</p>
+        </div>
+        <div class="file-drop-zone" id="pdfToImgDropZone">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Drop PDF file here or click to select</p>
+          <span class="file-support">Supports PDF files</span>
+        </div>
+        <input type="file" id="pdfToImgInput" accept=".pdf" style="display: none;">
+        <div class="file-list" id="pdfToImgFileList"></div>
+        <div class="options-panel">
+          <div class="option-group">
+            <label for="imageFormat">Image Format:</label>
+            <select id="imageFormat">
+              <option value="png">PNG</option>
+              <option value="jpeg">JPEG</option>
+            </select>
+          </div>
+          <div class="option-group">
+            <label for="pageRange">Page Range:</label>
+            <input type="text" id="pageRange" placeholder="e.g. 1-5,8,11-13 (blank for all pages)">
+          </div>
+        </div>
+        <div class="progress-container">
+          <div class="progress-status">
+            <span class="progress-percentage" id="pdfToImgProgressText">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" id="pdfToImgProgressBar"></div>
+          </div>
+        </div>
+        <button class="action-btn" id="pdfToImgBtn">
+          <i class="fas fa-file-image"></i>
+          <span>Convert to Images</span>
+          <div class="loading-spinner"></div>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-branding">
+        <div class="footer-logo"><i class="fas fa-file-pdf"></i> PDF Tools</div>
+        <p>Free online PDF tools - no installation required</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4>Tools</h4>
+          <a href="#" data-tab="merger">PDF Merger</a>
+          <a href="#" data-tab="imgToPdf">Image to PDF</a>
+          <a href="#" data-tab="compressor">PDF Compressor</a>
+          <a href="#" data-tab="pdfToImg">PDF to Images</a>
+        </div>
+        <div class="footer-column">
+          <h4>Information</h4>
+          <a href="#" id="privacyLink">Privacy Policy</a>
+          <a href="#" id="termsLink">Terms of Use</a>
+          <a href="#" id="aboutLink">About Us</a>
+          <a href="#" id="contactLink">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      © <span id="currentYear"></span> PDF Tools. All rights reserved.
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle"></h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
 
   <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="script.js"></script>
 </body>
 
